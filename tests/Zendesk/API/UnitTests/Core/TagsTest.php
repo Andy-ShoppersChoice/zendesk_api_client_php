@@ -38,4 +38,16 @@ class TagsTest extends BasicTest
     {
         $this->client->tickets()->tags()->find(1);
     }
+
+    /**
+     * Tests if the client can delete the tag
+     */
+    public function testDelete()
+    {
+        $this->assertEndpointCalled(function () {
+            $this->client->tickets(12345)->tags()->delete('test');
+        }, 'tickets/12345/tags.json', 'DELETE', ['queryParams' => ['id' => '12345', 'remove_tags'=>'test']]);
+    }
+
+
 }
